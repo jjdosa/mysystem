@@ -132,6 +132,8 @@ for the \"main\" or \"master\" branch."
 
 (add-hook 'magit-mode-hook #'modi/add-PR-fetch-ref)
 
+(use-package! magit-annex)
+
   (defun my/org-archive()
     (setq
       org-archive-mark-done nil

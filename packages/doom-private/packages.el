@@ -61,6 +61,8 @@
 
 (package! consult-eglot)
 
+(package! magit-annex)
+
 (package! swagger-to-org)
 
 (package! org-roam)

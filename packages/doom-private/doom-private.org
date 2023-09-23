@@ -649,6 +649,20 @@ for the \"main\" or \"master\" branch."
 
 #+end_src
 
+**** magit-annex
+
+#+begin_src emacs-lisp :tangle packages.el
+
+(package! magit-annex)
+
+#+end_src
+
+#+begin_src emacs-lisp
+
+(use-package! magit-annex)
+
+#+end_src
+
 ** Org Mode
 *** Org Archive
 
