@@ -18,6 +18,7 @@ in
     ./pfetch.nix
     ./htop.nix
     ./giter.nix
+    ./git-annex.nix
   ];
 
 
