@@ -122,6 +122,14 @@ in
         user = "solma";
       };
 
+      "uyuni" = {
+        hostname = "20.20.1.1";
+      };
+
+      "giron" = {
+        hostname = "20.20.1.2";
+      };
+
     }
     // builders
     // hpc-nodes;
