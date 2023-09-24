@@ -68,6 +68,7 @@ in
     dasel
     xpra
     lshw
+    tmux-xpanes
   ] ++
   (with mypackages; [
     tmux
