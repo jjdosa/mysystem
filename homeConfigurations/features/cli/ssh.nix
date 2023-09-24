@@ -25,6 +25,7 @@ in
 
     enable = true;
 
+    forwardAgent = true;
     controlMaster = "auto";
     controlPersist = "30d";
 

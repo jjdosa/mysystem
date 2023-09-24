@@ -25,6 +25,7 @@ let
     "hproxy"
     "hserver"
     "uyuni"
+    "giron"
     "b3"
     "b4"
     "b5"
