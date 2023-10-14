@@ -46,7 +46,7 @@ in
   nodes = {
 
     lima = {
-      hostname = "10.10.0.21";
+      hostname = host-ips.lima;
       profiles.system.path = activate-nixos "x86_64-linux" nixosConfigurations.lima;
       profiles."jj" = {
         user = "jj";
@@ -55,7 +55,7 @@ in
     };
 
     urubamba = {
-      hostname = "10.10.0.2";
+      hostname = host-ips.urubamba;
       profiles.system.path = activate-nixos "x86_64-linux" nixosConfigurations.urubamba;
       profiles."jj" = {
         user = "jj";
@@ -68,7 +68,7 @@ in
     };
 
     cusco = {
-      hostname = "10.10.0.3";
+      hostname = host-ips.cusco;
       profiles.system.path = activate-nixos "x86_64-linux" nixosConfigurations.cusco;
       profiles."jj" = {
         user = "jj";
@@ -77,7 +77,7 @@ in
     };
 
     lapaz = {
-      hostname = "10.10.0.23";
+      hostname = host-ips.lapaz;
       profiles.system.path = activate-nixos "x86_64-linux" nixosConfigurations.lapaz;
       profiles."jj" = {
         user = "jj";
@@ -86,7 +86,7 @@ in
     };
 
     bogota = {
-      hostname = "10.10.0.22";
+      hostname = host-ips.bogota;
       profiles.system.path = activate-nixos "x86_64-linux" nixosConfigurations.bogota;
       profiles."jj" = {
         user = "jj";
@@ -95,7 +95,7 @@ in
     };
 
     antofagasta = {
-      hostname = "10.10.0.24";
+      hostname = host-ips.antofagasta;
       profiles.system.path = activate-nixos "x86_64-linux" nixosConfigurations.antofagasta;
       profiles."jj" = {
         user = "jj";
@@ -104,7 +104,7 @@ in
     };
 
     giron = {
-      hostname = "10.10.0.25";
+      hostname = host-ips.giron;
       profiles.system.path = activate-nixos "x86_64-linux" nixosConfigurations.giron;
       profiles."jj" = {
         user = "jj";
@@ -113,7 +113,7 @@ in
     };
 
     atacama = {
-      hostname = "10.10.0.26";
+      hostname = host-ips.atacama;
       profiles.system.path = activate-nixos "x86_64-linux" nixosConfigurations.atacama;
       profiles."jj" = {
         user = "jj";
@@ -123,7 +123,7 @@ in
 
 
     havana = {
-      hostname = "192.168.50.110";
+      hostname = host-ips.havana;
       profiles.system.path = activate-nixos "x86_64-linux" nixosConfigurations.havana;
       profiles."jj" = {
         user = "jj";
