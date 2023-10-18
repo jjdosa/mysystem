@@ -48,6 +48,7 @@ in
     scrot                 # cli screen saver
 
     sweethome3d.application
+    discord
   ] ++
   (with mypackages; [
     screenlayout
