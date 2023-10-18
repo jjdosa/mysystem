@@ -1,4 +1,4 @@
-{ inputs, modulesPath, ... }:
+{ pkgs, inputs, modulesPath, ... }:
 let
 
   hds0-wireguard = import ../../features/wireguard.nix {
@@ -54,6 +54,7 @@ in
     ../../features/substituters/hds0.nix
     ../../features/remote-build.nix
     ../../features/peerix.nix
+    ../../features/mysql.nix
     ./nvidia.nix
 
   ];
