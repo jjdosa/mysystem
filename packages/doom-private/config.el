@@ -360,8 +360,10 @@ for the \"main\" or \"master\" branch."
         '("Libgen"            "http://libgen.rs/search.php?req=%s")))
 
 (use-package! gptel
- :config
- (setq gptel-api-key (auth-source-pass-get 'secret "keys/api.openai.com/jj@haedosa.xyz")))
+  :custom
+  (gptel-model "gpt-4")
+  :config
+  (setq gptel-api-key (auth-source-pass-get 'secret "keys/api.openai.com/jj@haedosa.xyz")))
 
 (use-package! rg
   :commands (rg rg-menu)
