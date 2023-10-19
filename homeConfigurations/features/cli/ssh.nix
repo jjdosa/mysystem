@@ -13,7 +13,7 @@ let
     value = {
       port = 2220 + n;
       user = "hds";
-      hostname = "20.20.100.1";
+      hostname = "20.20.1.1";
     };
   }) [ 1 2 3 4 5 ]);
 
