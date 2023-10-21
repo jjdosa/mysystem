@@ -93,7 +93,7 @@
        (lookup           ; helps you navigate your code and documentation
         +dictionary      ; dictionary/thesaurus is nice
         +docsets)        ; ...or in Dash docsets locally
-       (lsp +eglot)               ; M-x vscode
+       (lsp +peek)               ; M-x vscode
        magit             ; a git porcelain for Emacs
        ;;make              ; run make tasks from Emacs
        ;;pass              ; password manager for nerds
