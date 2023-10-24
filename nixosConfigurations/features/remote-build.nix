@@ -9,6 +9,15 @@ in
     distributedBuilds = true;
     buildMachines = [
       {
+        hostName = "10.10.100.7";
+        inherit sshUser sshKey;
+        system = "x86_64-linux";
+        maxJobs = 16;
+        speedFactor = 4;
+        supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+        mandatoryFeatures = [ ];
+      }
+      {
         hostName = "10.10.100.8";
         inherit sshUser sshKey;
         system = "x86_64-linux";
@@ -36,6 +45,10 @@ in
       HostName 10.10.100.3
       User jj
       IdentityFile ${sshKey}
+    Host b7
+      HostName 10.10.100.7
+      User jj
+      IdentityFile ${sshKey}
     Host b8
       HostName 10.10.100.8
       User jj
@@ -48,7 +61,7 @@ in
   services.openssh.knownHosts."10.10.100.4".publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPsGAj/2BqvU6EUKaeW0ojVNl9yIH+N89z5+LvHsnx8k";
   services.openssh.knownHosts."10.10.100.5".publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIFkD/jGF/atiNoGlN8WVBUinEfntOr6Vs96B2DWnvUO";
   services.openssh.knownHosts."10.10.100.6".publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINsRBagBDoPmuzq1jk8G6PiG6qKXwnG1lWy1dXQGLEgb";
-  services.openssh.knownHosts."10.10.100.7".publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJQy4M1n69auWSVYskWYegpMzdhTYTubmbTbhc0SVAJG";
+  services.openssh.knownHosts."10.10.100.7".publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ2C2kjRYFpS5SqZWtZVJ7o73qraXQd3f3egAvoDEcQr";
   services.openssh.knownHosts."10.10.100.8".publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOnpu94SKQgPzWN8Ypd+A9+mqjQwkCe6SPTLNXuSR7p3";
 
 }
