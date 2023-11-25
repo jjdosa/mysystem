@@ -10,8 +10,9 @@ let
   giron = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIP7qlu4YKYbtjN4oLFC9VQZYFWEGnpkHYt7MsF1+dHt6";
   atacama = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDHDPbMcRRRY54ObB8+v2Ir1Y8bol7Di11AS880CLwK0";
   cusco = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMZ+QRCsGXNpg1KjqkuT0QADMTeCf+fvJ66zI8K7dmf0";
+  toledo = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEg8jOMMkaDSGo3pQDcC2Fsv8X7/lHfblHvKjO0v5/eY";
 
-  systems = [ lima urubamba bogota lapaz antofagasta giron atacama cusco ];
+  systems = [ lima urubamba bogota lapaz antofagasta giron atacama cusco toledo ];
 
 in
 {
@@ -39,6 +40,10 @@ in
 
   # pubkey = CQYGMmwwS+Nd2SZ+GMykEKCGgoDgtbLcX0Ykwwemr2U=
   "wg-atacama.age".publicKeys = [ jj atacama ];
+
+  # pubkey = v7mFO8qkHdGKze897BLdzP/SIu3OlspQvX2+O/12Rno=
+  "wg-toledo.age".publicKeys = [ jj toledo ];
+  "ssh-toledo.age".publicKeys = [ jj toledo ];
 
   # pubkey = giron:0/bWdH7q7OTCgX8Yz4b+3utJDsVSsusLhqds/OVw5y8=
   "serve-giron.age".publicKeys = [ jj giron ];

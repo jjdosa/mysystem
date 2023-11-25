@@ -4,6 +4,11 @@ let
   inherit (builtins) split filter isString concatStringsSep;
   inherit (mylib) get-toplevel get-boot-essential;
 
+  inherit (import ./beon-bnoe.nix)
+    get-var-by-env-or-nix
+    get-var-by-nix-or-env
+    get-var;
+
 in
 rec
 {
@@ -94,6 +99,40 @@ rec
 
     '';
 
+
+  # btrfs2 is just btrfs that uses @ symbol for subvolumes
+  create-btrfs2-subvolumes = { root-label ? "root", mount-point ? "/mnt" }:
+    ''
+      ### create subvolumes ###
+
+      mount -t btrfs -L ${root-label} ${mount-point}
+
+      for sv in "" home nix persist log; do
+        btrfs subvolume create ${mount-point}/@$sv
+      done
+
+      # take an empty *readonly* snapshot of the root subvolume,
+      # which we'll eventually rollback to on every boot.
+      btrfs subvolume snapshot -r ${mount-point} ${mount-point}/root-blank
+
+      umount ${mount-point}
+    '';
+
+
+  # btrfs2 is just btrfs that uses @ symbol for subvolumes
+  mount-btrfs2-subvolumes = { root-label ? "root", boot-label ? "BOOT", mount-point ? "/mnt" }:
+    ''
+      ### Mount the subvolumes ###
+
+      for sv in "" home nix persist; do
+        mount -m -L ${root-label} -o subvol=@$sv,compress=zstd,noatime ${mount-point}/$sv
+      done
+      mount -m -L ${root-label} -o subvol=@log,compress=zstd,noatime ${mount-point}/var/log
+      mount -m -L ${boot-label} ${mount-point}/boot
+
+    '';
+
+
   mount-new-root = { root-label ? "root", boot-label ? "BOOT", mount-point ? "/mnt" }:
     ''
       ### mount-new-root ###
@@ -110,6 +149,57 @@ rec
 
       ######################################
     '';
+
+
+  mk-wg-key = { path ? "mk-wg-key" }:
+    ''
+      ${get-var-by-env-or-nix { name = "path"; env-var = "MYSYSTEM_PATH"; nix-var = path; }}
+
+      umask 077
+      mkdir -p $path
+      wg genkey > "$path"/private
+      wg pubkey < "$path"/private > "$path"/public
+      cat "$path"/public
+    '';
+
+  rekey-wg-key = { label ? "" }:
+    ''
+      ${get-var-by-env-or-nix { name = "label"; env-var = "MYSYSTEM_LABEL"; nix-var = label; }}
+      cd $PWD/secrets
+      EDITOR=: agenix -e wg-${label}.age
+      cd ..
+    '';
+
+
+  mk-ssh-key = { path ? "mk-ssh-key", label ? "" }:
+    ''
+      ${get-var-by-env-or-nix { name = "path"; env-var = "MYSYSTEM_PATH"; nix-var = path; }}
+      ${get-var-by-env-or-nix { name = "label"; env-var = "MYSYSTEM_LABEL"; nix-var = label; }}
+
+      echo path=$path
+      mkdir -p $path
+      ssh-keygen -t ed25519 -C "$label" -f "''${path}"/ssh_host_ed25519_key -P ""
+
+      echo ""
+      echo "ssh public key :"
+      cat ${path}/ssh_host_ed25519_key.pub
+    '';
+
+
+  # FIXME: error I've got
+  #  cat ../$file | EDITOR=: agenix -e wg-''${label}.age
+  #  wg-toledo.age wasn't created.
+  mk-age-file = { file ? "", label ? ""}:
+    ''
+      ${get-var-by-env-or-nix { name = "file"; env-var = "MYSYSTEM_FILE"; nix-var = file; }}
+      ${get-var-by-env-or-nix { name = "label"; env-var = "MYSYSTEM_LABEL"; nix-var = label; }}
+
+      pushd $PWD/secrets
+      cat ../$file
+      cat ../$file | EDITOR=: agenix -e wg-''${label}.age
+      popd
+    '';
+
 
   switch-after-enter = { system-toplevel, mount-point ? "/mnt", switch-command ? "switch" }:
     ''

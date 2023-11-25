@@ -30,6 +30,7 @@ let
        "jj@cusco"
        "jj@antofagasta"
        "jj@atacama"
+       "jj@toledo"
        "jj@server"
        "jiwon@havana"
        "suwonp@urubamba"

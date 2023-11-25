@@ -121,6 +121,14 @@ in
       };
     };
 
+    toledo = {
+      hostname = host-ips.toledo;
+      profiles.system.path = activate-nixos "x86_64-linux" nixosConfigurations.toledo;
+      profiles."jj" = {
+        user = "jj";
+        path = activate-home "x86_64-linux" homeConfigurations."jj@toledo";
+      };
+    };
 
     havana = {
       hostname = host-ips.havana;

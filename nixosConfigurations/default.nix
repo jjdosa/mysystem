@@ -22,6 +22,7 @@ let
        "usb"
        "havana"
        "atacama"
+       "toledo"
      ]);
 
 in nixosSystems
